@@ -15,7 +15,7 @@ from utils import ExportUtils
 
 
 
-GEMINI_API_KEY = "AIzaSyBUFUM-4bejnHVgpfbW0fS2NzRn6yB8s1s"
+GEMINI_API_KEY = "AIzaSyDg2nQMmNVCxWEqsQwXLls2ksdX_h0a4Mw"
 LASTFM_API_KEY = "965e178b0dd41faa21c2033be695943a"
 
 
@@ -191,41 +191,44 @@ class AlbumCoverStudioApp:
 
 
         self.upper_right = tk.Frame(self.right_frame, bg="#121212")
-        self.upper_right.pack(fill=tk.X, pady=10)
+        self.upper_right.pack(fill=tk.X, pady=10, anchor=tk.W)
+
+
+        self.cover_frame = tk.Frame(self.upper_right, bg="#181818", width=250, height=250)
+        self.cover_frame.pack(side=tk.LEFT, padx=10, pady=5)
+        self.cover_frame.pack_propagate(False)
 
 
         self.lbl_cover = tk.Label(
-            self.upper_right,
-            text="Generated cover art\nwill be shown here",
+            self.cover_frame,
+            text="No Cover Art\nGenerated",
             bg="#181818",
             fg="gray",
-            width=28,
-            height=11,
             font=("Arial", 10, "italic"),
         )
-        self.lbl_cover.pack(side=tk.LEFT, padx=10)
+        self.lbl_cover.pack(fill=tk.BOTH, expand=True)
 
-
+        # Sanatçı ve Albüm Bilgileri Metin Alanı
         self.txt_meta = tk.Text(
             self.upper_right,
             bg="#121212",
             fg="white",
             relief=tk.FLAT,
             font=("Arial", 11),
-            height=11,
+            height=12,
             wrap=tk.WORD,
         )
         self.txt_meta.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=15)
         self.txt_meta.insert(tk.END, "Fictional album details will appear here after generation...")
         self.txt_meta.config(state=tk.DISABLED)
 
-
+        # Alt Kısım: Şarkı Listesi Başlığı
         lbl_tracklist_title = ttk.Label(
             self.right_frame, text="GENERATED TRACKLIST (REAL SONGS)", style="TLabel"
         )
         lbl_tracklist_title.pack(anchor=tk.W, padx=10, pady=10)
 
-
+        # Şarkı Listesi İçin Scrollable Ana Çerçeve
         self.tracklist_container = tk.Frame(self.right_frame, bg="#121212")
         self.tracklist_container.pack(fill=tk.BOTH, expand=True, padx=10)
 
@@ -316,18 +319,18 @@ class AlbumCoverStudioApp:
         self.txt_meta.delete("1.0", tk.END)
 
         meta_text = (
-            f"ALBUM (FICTIONAL CONCEPT):\n"
-            f"Title: {self.album_data.get('album_name', 'Unknown')}\n"
-            f"Artist: {self.album_data.get('artist_name', 'Unknown')}\n"
-            f"Release Year: {self.album_data.get('year', 'N/A')} |  Label: {self.album_data.get('label', 'N/A')}\n\n"
-            f"Vibe Description:\n\"{self.album_data.get('mood_description', 'N/A')}\"\n\n"
-            f"Visual Prompt:\n\"{self.album_data.get('cover_prompt', 'N/A')}\""
+            f"ALBUM (FICTIONAL CONCEPT):\n\n"
+            f"💿 Title: {self.album_data.get('album_name', 'Unknown')}\n"
+            f"🎤 Artist: {self.album_data.get('artist_name', 'Unknown')}\n"
+            f"📅 Release Year: {self.album_data.get('year', 'N/A')} | 🏷️ Label: {self.album_data.get('label', 'N/A')}\n\n"
+            f"💬 Vibe Description:\n\"{self.album_data.get('mood_description', 'N/A')}\"\n\n"
+            f"🎨 Visual Prompt:\n\"{self.album_data.get('cover_prompt', 'N/A')}\""
         )
         self.txt_meta.insert(tk.END, meta_text)
         self.txt_meta.config(state=tk.DISABLED)
 
 
-        bio_img = self.generated_image.resize((220, 220), Image.Resampling.LANCZOS)
+        bio_img = self.generated_image.resize((250, 250), Image.Resampling.LANCZOS)
         self.tk_img = ImageTk.PhotoImage(bio_img)
         self.lbl_cover.config(image=self.tk_img, text="")
 
