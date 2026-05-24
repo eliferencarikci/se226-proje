@@ -15,7 +15,7 @@ from utils import ExportUtils
 
 
 
-GEMINI_API_KEY = "AIzaSyDg2nQMmNVCxWEqsQwXLls2ksdX_h0a4Mw"
+GEMINI_API_KEY = "AIzaSyCNDPBDgzdBJomnKpviN7YlCMRzIbvU18w"
 LASTFM_API_KEY = "965e178b0dd41faa21c2033be695943a"
 
 
@@ -297,8 +297,7 @@ class AlbumCoverStudioApp:
             self.update_status("Generating cover...")
             cover_prompt = self.album_data.get("cover_prompt", "Abstract art")
 
-            self.generated_image = self.image_service.generate_cover(cover_prompt, genre)
-
+            self.generated_image = self.image_service.generate_cover(cover_prompt, genre, era=era)
 
             self.root.after(0, self.display_results)
 

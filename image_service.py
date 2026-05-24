@@ -3,10 +3,9 @@ from urllib.parse import quote
 from PIL import Image
 import requests
 
-
 class ImageService:
 
-    def generate_cover(self, prompt, genre):
+    def generate_cover(self, prompt, genre, era="modern"):
 
         genre_styles = {
             "Pop": "vibrant colors, clean modern pop aesthetic, glossy, professional studio lighting",
@@ -21,16 +20,14 @@ class ImageService:
             "Klasik": "classical oil painting style, fine art textures, elegant orchestral hall atmosphere, timeless",
         }
 
-
         visual_style = genre_styles.get(
             genre, "artistic digital art, professional album cover design"
         )
 
 
         full_prompt = (
-            f"Official square album cover art, {visual_style}. "
-            f"Concept: {prompt}. "
-            f"Cinematic lighting, 8k resolution, high quality design, no text on image"
+            f"Official square album cover art from the {era}, {visual_style}. "
+            f"Concept: {prompt}."
         )
 
         encoded = quote(full_prompt)
@@ -38,9 +35,8 @@ class ImageService:
 
         url = (
             f"https://image.pollinations.ai/prompt/{encoded}"
-            f"?width=600&height=600&nologo=true"
+            f"?width=600&height=600&enhance=false"
         )
-
 
         response = requests.get(url, timeout=90)
         response.raise_for_status()
