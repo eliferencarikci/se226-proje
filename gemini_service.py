@@ -33,16 +33,20 @@ class GeminiService:
         - It must heavily reflect the emotional vibe of the journal entry (e.g., melancholy, isolation, joy).
         - DO NOT include any text, letters, typography, or words like "text", "label", "album cover" inside the prompt itself.
 
-        STRICT RULES FOR LAST.FM TAGS ("lastfm_tags"):
-        - Provide an array of exactly 5-6 lowercase strings.
-        - To get REAL songs from that specific era and genre from the Last.fm API, you MUST generate accurate hybrid tags.
-        - Examples of valid historical/genre tags for Last.fm:
-          * For 1970s Rock: ["70s rock", "1970s", "classic rock", "rock"]
-          * For 1990s Hip-Hop: ["90s hip hop", "90s rap", "old school hip hop"]
-          * For 2000s Indie: ["2000s indie", "00s indie", "indie rock"]
-          * For Türk Pop 1990s: ["90lar turkce pop", "90s turkish", "turkce pop"]
-          * For Türk Pop 2000s: ["2000ler turkce pop", "turkish pop"]
-        - Blend these with 1 or 2 emotional mood tags from the journal (e.g., "melancholic", "sad", "chill", "hüzünlü").
+        STRICT RULES FOR MOOD TAGS ("mood_tags"):
+        - Provide an array of exactly 1-2 lowercase strings.
+        - Mood tags must be common Last.fm-compatible mood descriptors.
+        - Use ONLY simple mood words.
+
+        Examples:
+        ["sad"]
+        ["dreamy", "melancholic"]
+        ["dark"]
+        ["happy", "chill"]
+
+        - DO NOT generate genre tags.
+        - DO NOT generate era tags.
+        - DO NOT invent long phrases or complex tags.
 
         Return ONLY a valid JSON object matching this schema:
         {{
@@ -52,7 +56,7 @@ class GeminiService:
           "label": "Fictional Record Label",
           "mood_description": "A detailed explanation of how the album's concept matches the user's journal entry.",
           "cover_prompt": "A vivid description of the artwork scene without any text.",
-          "lastfm_tags": ["tag1", "tag2", "tag3", "tag4", "tag5"]
+          "mood_tags": ["sad", "dreamy"]
         }}
 
         User Journal:
