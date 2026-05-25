@@ -26,8 +26,11 @@ class ImageService:
 
 
         full_prompt = (
-            f"Official square album cover art from the {era}, {visual_style}. "
-            f"Concept: {prompt}."
+            f"Official square album cover art from the {era}. "
+            f"Mood and emotion: {prompt}. "
+            f"Visual style: {visual_style}. "
+            f"The cover art must visually reflect the emotional tone described. "
+            f"No text, no typography, purely visual artwork."
         )
 
         encoded = quote(full_prompt)

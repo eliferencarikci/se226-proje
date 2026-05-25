@@ -15,8 +15,8 @@ from utils import ExportUtils
 
 
 
-GEMINI_API_KEY = "AIzaSyCNDPBDgzdBJomnKpviN7YlCMRzIbvU18w"
-LASTFM_API_KEY = "965e178b0dd41faa21c2033be695943a"
+GEMINI_API_KEY = "AIzaSyA2mrpSuuhtj5v_W-wBxIa0nV0tFRnNfX4"
+LASTFM_API_KEY = "1093b73660eca2814acb8ca879408419"
 
 
 class AlbumCoverStudioApp:
